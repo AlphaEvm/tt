@@ -1,0 +1,32 @@
+else:
+        if len(stack) >= 2:
+            stack.append(label['text'])
+            calculate()
+            stack.clear()
+            stack.append(label['text'])
+            activeStr = ''
+            if text != '=':
+                stack.append(text)
+        else:
+            if text != '=':
+                stack.append(label['text'])
+                stack.append(text)
+                activeStr = ''
+                label.configure(text='0')
+
+
+label = Label(root, text='0', width=35)
+label.grid(row=0, column=0, columnspan=4, sticky="nsew")
+
+button = Button(root, text='CE', command=lambda text='CE': click(text))
+button.grid(row=1, column=3, sticky="nsew")
+for row in range(4):
+    for col in range(4):
+        button = Button(root, text=buttons[row][col],
+                command=lambda row=row, col=col: click(buttons[row][col]))
+        button.grid(row=row + 2, column=col, sticky="nsew")
+
+root.grid_rowconfigure(6, weight=1)
+root.grid_columnconfigure(4, weight=1)
+
+root.mainloop()
